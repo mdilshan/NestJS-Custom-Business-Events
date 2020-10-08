@@ -46,8 +46,12 @@ export class InvoiceController {
 There are set of events that can happen in the application. Those event types are defined inside this repo. One of the event is ON_INVOICE_ADD. this is just a type. The client,
 or the developer who use this module, needs to find the appropirate event for his/her method and use it.
 
-The method `emit()` has three(03) arguments. First one is the type of the event from the `EventTypes` enum. the second argument has the fact that is going to check against the rules in the database used in rule engine microservice.
+## Arguments of `emit()` method
 
-The 3rd argument is the callback function which is going to execute after the result came in from the microservice. You have to add the logic of the addInvoice() method in to callback function. But you don't need to add everything in to here, for example, validating, doing calucation like stuff, you can do them before emit the event. What you need to do in the callback is, actuall purpose / logic of the addInvoice method. In this case, it is adding an invoice to the database.
+| Argument | Description |
+| --- | --- |
+| 1st arg | The type of the event from the `EventTypes` enum |
+| 2nd arg | The second argument has the fact that is going to check against the rules in the database used in rule engine microservice. |
+| 3rd arg | The 3rd argument is the callback function which is going to execute after the result came in from the microservice. You have to add the logic of the addInvoice() method in to callback function. But you don't need to add everything in to here, for example, validating, doing calucation like stuff, you can do them before emit the event. What you need to do in the callback is, actuall purpose / logic of the addInvoice method. In this case, it is adding an invoice to the database.|
 
 **IMPORTANT!! - The callback is not going to call always. For example, if the Action, UNDO_ACTIVITY triggered, then the callback will be ignored and instead UNDO_ACTIVITY will emit a notification to the front end that saying "The process is block by 'rule_name'"**
